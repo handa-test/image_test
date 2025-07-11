@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>オフィスITのお役立ちコラム</title>
+<style>
+:root {
+  --main-orange: #ff8800;
+  --main-grad: linear-gradient(90deg, #ff8800 0%, #ffbe73 100%);
+  --card-bg: #fff;
+  --bg-light: #fff7ee;
+  --card-radius: 1.3rem;
+}
+body { background: var(--bg-light); margin: 0; font-family: 'Segoe UI', 'Noto Sans JP', sans-serif;}
+.blog-header {
+  background: var(--main-grad);
+  padding: 3.5rem 0 2.2rem 0;
+  text-align: center;
+  color: #fff;
+}
+.blog-header-inner { max-width: 880px; margin: 0 auto;}
+.blog-header h1 {
+  font-size: 2.7rem; margin: 0; font-weight: 900; letter-spacing: 0.04em; line-height: 1.2;
+}
+.blog-header h1 .en {
+  font-size: 1.15em; font-weight: 800; letter-spacing: 0.16em; opacity: 0.84; display: block;
+  font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
+}
+.blog-header h1 .jp { display: block; font-size: 0.75em; margin-top: 0.13em; font-weight: 500; letter-spacing: 0.04em; opacity: 0.95;}
+.blog-header-desc { margin-top: 1.3rem; font-size: 1.13rem; letter-spacing: 0.01em; line-height: 1.6; opacity: 0.94;}
+.blog-list {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem; max-width: 1100px; margin: 3rem auto; padding: 0 1.2rem;
+}
+.blog-card {
+  background: var(--card-bg);
+  border-radius: var(--card-radius);
+  box-shadow: 0 2px 12px rgba(255,136,0,0.11);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform .22s, box-shadow .22s;
+  cursor: pointer;
+  min-width: 0;
+}
+.blog-card:hover {
+  transform: translateY(-9px) scale(1.04);
+  box-shadow: 0 10px 28px rgba(255,136,0,0.18);
+}
+.blog-thumb {
+  width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; background: #ffedd2;
+}
+.blog-content { flex: 1; padding: 1.1rem 1.3rem 1.2rem; display: flex; flex-direction: column;}
+.blog-meta { font-size: 0.95rem; color: #999; margin-bottom: 0.6rem; display: flex; gap: 1rem; align-items: center;}
+.blog-tag { background: var(--main-orange); color: #fff; font-size: 0.82em; border-radius: 1em; padding: 0.1em 0.8em; margin-left: auto;}
+.blog-title { font-size: 1.21rem; font-weight: 700; margin: 0 0 0.55rem 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;}
+.blog-desc { color: #888; font-size: 1rem; flex: 1; margin-bottom: 0.8rem; margin-top: 0; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;}
+.blog-footer { display: flex; justify-content: flex-end; align-items: center; gap: 0.5rem; font-size: 0.95em; color: var(--main-orange); font-weight: bold;}
+.pagination { text-align: center; margin-bottom: 2rem;}
+.pagination span,.pagination a {
+  display: inline-block; background: #fff; color: var(--main-orange);
+  border-radius: 1.2em; padding: 0.45em 1.15em; margin: 0 0.1em; font-size: 1.05em; text-decoration: none;
+  box-shadow: 0 1px 4px rgba(255,136,0,0.09); transition: background .17s;
+}
+.pagination .current, .pagination a:hover { background: var(--main-orange); color: #fff;}
+@media (max-width: 700px) {
+  .blog-header { padding: 2rem 0 1.2rem 0;}
+  .blog-header h1 { font-size: 1.3rem;}
+  .blog-list { gap: 1rem; margin: 2rem 0;}
+  .blog-content { padding: 1rem 1rem 1.1rem;}
+}
+</style>
+</head>
+<body>
+<header class="blog-header">
+  <div class="blog-header-inner">
+    <h1>
+      <span class="en">Column</span>
+      <span class="jp">オフィスITのお役立ちコラム</span>
+    </h1>
+    <p class="blog-header-desc">ITのお悩み・最新トレンドをやさしく解説。<br>業務に役立つノウハウを発信しています。</p>
+  </div>
+</header>
+<section class="blog-list" id="blog-list"></section>
+<nav class="pagination">
+  <span class="current">1</span>
+  <a href="#">2</a>
+  <a href="#">3</a>
+  <span>...</span>
+  <a href="#">5</a>
+</nav>
+<script>
+const blogs = [
+  {
+    title: "中小企業のためのセキュリティ対策！社内教育から外部攻撃まで徹底解説",
+    desc: "中小企業が知っておきたいITセキュリティの基礎。日々の運用から実践的な対策まで、すぐ使えるノウハウを紹介。",
+    date: "2025-07-10", tag: "情報システム"
+  },
+  {
+    title: "中小企業のIT課題最前線！IT部門の構築と業務改革を社長目線で考える",
+    desc: "経営層にこそ知ってほしいIT課題の実態。導入で変わる働き方と事例を紹介します。",
+    date: "2025-04-11", tag: "経営"
+  },
+  {
+    title: "中小企業の業務システムIT整備でアウトソーシングするメリットと成功のポイント",
+    desc: "システム導入で“何がどう変わるのか”。現場の悩みを解決した具体例とともにご案内。",
+    date: "2025-01-25", tag: "システム"
+  },
+  {
+    title: "ITヘルプデスクのアウトソーシング完全ガイド｜メリットや選び方徹底解説",
+    desc: "ITヘルプデスク業務を外部委託するメリットとリスク、失敗しない選び方を実例つきで。",
+    date: "2025-03-01", tag: "サポート"
+  }
+];
+const blogList = document.getElementById('blog-list');
+blogs.forEach((b) => {
+  const card = document.createElement('div');
+  card.className = "blog-card";
+  card.innerHTML = `
+    <img src="thumbnail.png" class="blog-thumb" alt="ブログサムネイル">
+    <div class="blog-content">
+      <div class="blog-meta">
+        <span>${b.date}</span>
+        <span class="blog-tag">${b.tag}</span>
+      </div>
+      <div class="blog-title">${b.title}</div>
+      <p class="blog-desc">${b.desc}</p>
+      <div class="blog-footer">
+        <span>続きを読む</span>
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </div>
+    </div>
+  `;
+  card.addEventListener('click', () => {
+    alert("詳細ページに遷移（サンプル）");
+  });
+  blogList.appendChild(card);
+});
+</script>
+</body>
+</html>
